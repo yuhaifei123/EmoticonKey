@@ -10,9 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var textView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+     
+         // 1.将键盘控制器添加为当前控制器的子控制器
+        self.addChildViewController(emoticon);
+        
+        // 2.将表情键盘控制器的view设置为UITextView的inputView
+        self.textView.inputView = emoticon.view;
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,5 +28,7 @@ class ViewController: UIViewController {
     }
 
 
+    private lazy var emoticon : EmoticonViewController = EmoticonViewController();
+    
 }
 
