@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4DC141161E41AFD30045129A /* EmoticonPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC141151E41AFD30045129A /* EmoticonPackage.swift */; };
+		4DC141181E41B5EA0045129A /* Emoticons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4DC141171E41B5EA0045129A /* Emoticons.bundle */; };
 		4DD71A2B1E372F75007D585D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD71A2A1E372F75007D585D /* AppDelegate.swift */; };
 		4DD71A2D1E372F75007D585D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD71A2C1E372F75007D585D /* ViewController.swift */; };
 		4DD71A301E372F75007D585D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DD71A2E1E372F75007D585D /* Main.storyboard */; };
@@ -68,6 +69,7 @@
 
 /* Begin PBXFileReference section */
 		4DC141151E41AFD30045129A /* EmoticonPackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonPackage.swift; sourceTree = "<group>"; };
+		4DC141171E41B5EA0045129A /* Emoticons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Emoticons.bundle; sourceTree = "<group>"; };
 		4DD71A271E372F75007D585D /* EmoticonKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmoticonKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DD71A2A1E372F75007D585D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DD71A2C1E372F75007D585D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,8 +83,7 @@
 		4DD71A461E372F75007D585D /* EmoticonKeyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmoticonKeyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DD71A4A1E372F75007D585D /* EmoticonKeyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmoticonKeyUITests.swift; sourceTree = "<group>"; };
 		4DD71A4C1E372F75007D585D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4DD71A5A1E37301E007D585D /* Emoticons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Emoticons.bundle; sourceTree = "<group>"; };
-		4DD71A651E373979007D585D /* EmoticonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonViewController.swift; sourceTree = "<group>"; };
+		4DD71A651E373979007D585D /* EmoticonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmoticonViewController.swift; path = ../EmoticonViewController.swift; sourceTree = "<group>"; };
 		4DD71A681E3844DB007D585D /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		4DD71A691E3844DB007D585D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4DD71A6B1E3844DB007D585D /* Constraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constraint.swift; sourceTree = "<group>"; };
@@ -146,6 +147,7 @@
 		4DC141121E41AF900045129A /* mode */ = {
 			isa = PBXGroup;
 			children = (
+				4DC141171E41B5EA0045129A /* Emoticons.bundle */,
 				4DC141151E41AFD30045129A /* EmoticonPackage.swift */,
 			);
 			path = mode;
@@ -175,14 +177,12 @@
 			isa = PBXGroup;
 			children = (
 				4DD71A671E3844DB007D585D /* SnapKit */,
-				4DD71A5A1E37301E007D585D /* Emoticons.bundle */,
 				4DD71A2A1E372F75007D585D /* AppDelegate.swift */,
 				4DD71A2C1E372F75007D585D /* ViewController.swift */,
 				4DD71A2E1E372F75007D585D /* Main.storyboard */,
 				4DD71A311E372F75007D585D /* Assets.xcassets */,
 				4DD71A331E372F75007D585D /* LaunchScreen.storyboard */,
 				4DD71A361E372F75007D585D /* Info.plist */,
-				4DD71A651E373979007D585D /* EmoticonViewController.swift */,
 			);
 			path = EmoticonKey;
 			sourceTree = "<group>";
@@ -208,6 +208,7 @@
 		4DD71A671E3844DB007D585D /* SnapKit */ = {
 			isa = PBXGroup;
 			children = (
+				4DD71A651E373979007D585D /* EmoticonViewController.swift */,
 				4DC141121E41AF900045129A /* mode */,
 				4DD71A681E3844DB007D585D /* LICENSE */,
 				4DD71A691E3844DB007D585D /* README.md */,
@@ -366,6 +367,7 @@
 				4DD71A321E372F75007D585D /* Assets.xcassets in Resources */,
 				4DD71A8A1E3844DB007D585D /* LICENSE in Resources */,
 				4DD71A301E372F75007D585D /* Main.storyboard in Resources */,
+				4DC141181E41B5EA0045129A /* Emoticons.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
