@@ -38,9 +38,10 @@ class EmoticonPackage: NSObject {
     // 默认 -> 一组  -> 所有的表情模型(emoticons)
     // emoji -> 一组  -> 所有的表情模型(emoticons)
     class func loadPackages() -> [EmoticonPackage] {
-        let path = Bundle.main.path(forResource: "emoticons.plist", ofType: nil, inDirectory: "Emoticons.bundle")!
+        let path = Bundle.main.path(forResource: "emoticons.plist", ofType: nil, inDirectory: "Emoticons.bundle")
+       
         // 1.加载emoticons.plist
-        let dict = NSDictionary(contentsOfFile: path)!
+        let dict = NSDictionary(contentsOfFile: path!)!
         // 2.或emoticons中获取packages
         let dictArray = dict["packages"] as! [[String:AnyObject]]
         // 3.遍历packages数组
@@ -91,18 +92,36 @@ class Emoticon: NSObject {
     /// 表情对应的文字
     var chs: String?
     /// 表情对应的图片
-    var png: String?
-        {
-        didSet{
-            imagePath = (EmoticonPackage.emoticonPath().appendingPathComponent(id!) as NSString).appendingPathComponent(png!)
-        }
-    }
+    var png: String?;
     /// emoji表情对应的十六进制字符串
-    var code: String?{
-        didSet{
+    var code: String?;
+    var emojiStr: String?;
+    /// 当前表情对应的文件夹
+    var id: String?
+    
+    /// 表情图片的全路径
+    var imagePath: String?
+    
+    init(dict: [String: String], id: String){
+        
+        super.init()
+        self.id = id
+        
+        self.chs = dict["chs"];
+        self.png = dict["png"];
+        self.code = dict["code"];
+        self.emojiStr = dict["emojiStr"];
+      
+        //setValuesForKeys(dict);
+        if self.png != nil {
+                self.imagePath = (EmoticonPackage.emoticonPath().appendingPathComponent(id) as NSString).appendingPathComponent(png!)
+        }
+       
+        if dict["code"] != nil {
+            
             // 1.从字符串中取出十六进制的数
             // 创建一个扫描器, 扫描器可以从字符串中提取我们想要的数据
-            let scanner = Scanner(string: code!)
+            let scanner = Scanner(string: dict["code"]!)
             
             // 2.将十六进制转换为字符串
             var result:UInt32 = 0
@@ -113,22 +132,7 @@ class Emoticon: NSObject {
         }
     }
     
-    var emojiStr: String?
-    
-    /// 当前表情对应的文件夹
-    var id: String?
-    
-    /// 表情图片的全路径
-    var imagePath: String?
-    
-    init(dict: [String: String], id: String)
-    {
-        super.init()
-        self.id = id
-        setValuesForKeys(dict)
-    }
-    
-    override func setValue(_ value: Any?, forKey key: String) {
+    override func setValuesForKeys(_ keyedValues: [String : Any]) {
         
     }
 }
