@@ -78,6 +78,8 @@ class EmoticonViewController: UIViewController {
         toolbar.items = items
         return toolbar;
     }();
+    
+    public lazy var packages : [EmoticonPackage] = EmoticonPackage.loadPackages();
 }
 
 extension EmoticonViewController : UICollectionViewDataSource{
@@ -87,18 +89,25 @@ extension EmoticonViewController : UICollectionViewDataSource{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:XMGEmoticonCellReuseIdentifier , for: indexPath) as! EmoticonCell;
         cell.backgroundColor = (indexPath.item % 2 == 0) ? UIColor.red : UIColor.green;
 
+        // 1.取出对应的组
+        let package = packages[indexPath.section]
+        // 2.取出对应组对应行的模型
+        let emoticon = package.emoticons![indexPath.item]
+        // 3.赋值给cell
+        cell.emoticon = emoticon
         return cell;
     }
 
     //多少个
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return 100;
+       
+         return packages[section].emoticons?.count ?? 0;
     }
     
     // 告诉系统每组有多少行
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        
+        return packages.count;
     }
 }
 
@@ -110,6 +119,26 @@ class EmoticonCell : UICollectionViewCell {
         
         setupUI();
     }
+    
+    var emoticon: Emoticon?{
+        
+        didSet{
+            // 1.判断是否是图片表情
+            if emoticon!.chs != nil
+            {
+                iconButton.setImage(UIImage(contentsOfFile: emoticon!.imagePath!), for: UIControlState.normal)
+            }else
+            {
+                // 防止重用
+                iconButton.setImage(nil, for: UIControlState.normal)
+            }
+            
+            // 2.设置emoji表情
+            // 注意: 加上??可以防止重用
+            iconButton.setTitle(emoticon!.emojiStr ?? "", for: UIControlState.normal)
+        }
+    }
+
     
     func setupUI(){
         
