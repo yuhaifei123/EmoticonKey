@@ -38,6 +38,7 @@ class EmoticonPackage: NSObject {
     // 默认 -> 一组  -> 所有的表情模型(emoticons)
     // emoji -> 一组  -> 所有的表情模型(emoticons)
     class func loadPackages() -> [EmoticonPackage] {
+        
         let path = Bundle.main.path(forResource: "emoticons.plist", ofType: nil, inDirectory: "Emoticons.bundle")
        
         // 1.加载emoticons.plist
@@ -51,7 +52,8 @@ class EmoticonPackage: NSObject {
             // 4.取出ID, 创建对应的组
             let package = EmoticonPackage(id: d["id"]! as! String)
             packages.append(package)
-            package.loadEmoticons()
+            package.loadEmoticons();
+            package.appendEmtyEmoticons();
         }
         return packages
     }
@@ -64,6 +66,23 @@ class EmoticonPackage: NSObject {
         emoticons = [Emoticon]()
         for dict in dictArray{
             emoticons?.append(Emoticon(dict: dict, id: id!))
+        }
+    }
+    
+    
+    /// 添加删除按钮
+    func appendEmtyEmoticons(){
+        
+        if let num = emoticons{
+            let count = num.count % 21;
+            
+            for _ in count ..< 20 {
+                //添加空，不是删除按钮
+                emoticons!.append(Emoticon.init(removButton: false));
+            }
+            
+            //最后加上删除按钮
+            emoticons!.append(Emoticon.init(removButton: true));
         }
     }
     
@@ -98,13 +117,21 @@ class Emoticon: NSObject {
     var emojiStr: String?;
     /// 当前表情对应的文件夹
     var id: String?
+    /// 删除按钮
+    var removButton : Bool = false;
     
     /// 表情图片的全路径
     var imagePath: String?
     
-    init(dict: [String: String], id: String){
+    init(removButton : Bool) {
+        super.init();
         
-        super.init()
+        self.removButton = removButton;
+    }
+    
+    init(dict: [String: String], id: String){
+        super.init();
+        
         self.id = id
         
         self.chs = dict["chs"];
@@ -117,6 +144,7 @@ class Emoticon: NSObject {
                 self.imagePath = (EmoticonPackage.emoticonPath().appendingPathComponent(id) as NSString).appendingPathComponent(png!)
         }
        
+        //十六进制转化
         if dict["code"] != nil {
             
             // 1.从字符串中取出十六进制的数
