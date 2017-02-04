@@ -58,7 +58,7 @@ class EmoticonViewController: UIViewController {
     private lazy var collectionVeiw : UICollectionView = {
     
         let collview = UICollectionView(frame: CGRect.zero, collectionViewLayout: EmoticonLayout());
-         collectionVeiw.backgroundColor = UIColor.white;
+         collview.backgroundColor = UIColor.white;
         // 注册cell
         collview.register(EmoticonCell.self, forCellWithReuseIdentifier: XMGEmoticonCellReuseIdentifier);
         collview.dataSource = self
