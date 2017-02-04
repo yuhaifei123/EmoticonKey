@@ -46,6 +46,10 @@ class EmoticonViewController: UIViewController {
         }
     }
     
+    
+    /// 点击按钮，触发事件
+    ///
+    /// - Parameter item: <#item description#>
     public func clickItem(item : UIBarButtonItem){
 
         print("不要乱点");
@@ -54,6 +58,7 @@ class EmoticonViewController: UIViewController {
     private lazy var collectionVeiw : UICollectionView = {
     
         let collview = UICollectionView(frame: CGRect.zero, collectionViewLayout: EmoticonLayout());
+         collectionVeiw.backgroundColor = UIColor.white;
         // 注册cell
         collview.register(EmoticonCell.self, forCellWithReuseIdentifier: XMGEmoticonCellReuseIdentifier);
         collview.dataSource = self
@@ -94,21 +99,23 @@ extension EmoticonViewController : UICollectionViewDataSource{
         // 2.取出对应组对应行的模型
         let emoticon = package.emoticons![indexPath.item]
         // 3.赋值给cell
-        cell.emoticon = emoticon
+        cell.emoticon = emoticon;
+        
         return cell;
     }
 
-    //多少个
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       
-         return packages[section].emoticons?.count ?? 0;
+    // 告诉系统每组有多少行
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int{
+    
+        return packages[section].emoticons?.count ?? 0;
     }
     
-    // 告诉系统每组有多少行
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+    //有多少组
+    public func numberOfSections(in collectionView: UICollectionView) -> Int{
+    
         return packages.count;
     }
+
 }
 
 class EmoticonCell : UICollectionViewCell {
@@ -124,11 +131,11 @@ class EmoticonCell : UICollectionViewCell {
         
         didSet{
             // 1.判断是否是图片表情
-            if emoticon!.chs != nil
-            {
+            if emoticon!.chs != nil{
+                
                 iconButton.setImage(UIImage(contentsOfFile: emoticon!.imagePath!), for: UIControlState.normal)
-            }else
-            {
+            }
+            else{
                 // 防止重用
                 iconButton.setImage(nil, for: UIControlState.normal)
             }
@@ -136,6 +143,12 @@ class EmoticonCell : UICollectionViewCell {
             // 2.设置emoji表情
             // 注意: 加上??可以防止重用
             iconButton.setTitle(emoticon!.emojiStr ?? "", for: UIControlState.normal)
+            
+            if emoticon!.removButton {
+                
+                iconButton.setImage(UIImage(named: "compose_emotion_delete"), for: UIControlState.normal);
+                iconButton.setImage(UIImage(named: "compose_emotion_delete_highlighted"), for: UIControlState.highlighted);
+            }
         }
     }
 
