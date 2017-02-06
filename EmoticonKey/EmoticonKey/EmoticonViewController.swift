@@ -14,17 +14,30 @@ private let XMGEmoticonCellReuseIdentifier = "XMGEmoticonCellReuseIdentifier"
 
 class EmoticonViewController: UIViewController {
     
+    
+    /// 定义一个 block 函数
+    var emoticonDidSelectCallBack : ((_ emoticon : Emoticon) -> ()) ;
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.setupUI();
     }
+    
+    /// @escaping  逃离
+    ///
+    /// - Parameter emoticonBack: <#emoticonBack description#>
+    init (emoticonBack : @escaping (_ emoticon : Emoticon) -> ()) {
+         self.emoticonDidSelectCallBack = emoticonBack;
+        super.init(nibName: nil, bundle: nil);
+       
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
     
     /// 添加 ui
     private func setupUI(){
@@ -52,7 +65,8 @@ class EmoticonViewController: UIViewController {
     /// - Parameter item: <#item description#>
     public func clickItem(item : UIBarButtonItem){
 
-        print("不要乱点");
+        //选择了那过 item ，触发 collectionVeiw
+        collectionVeiw.scrollToItem(at: IndexPath(item: 0, section: item.tag), at: UICollectionViewScrollPosition.left, animated: true);
     }
     
     private lazy var collectionVeiw : UICollectionView = {
@@ -61,7 +75,8 @@ class EmoticonViewController: UIViewController {
          collview.backgroundColor = UIColor.white;
         // 注册cell
         collview.register(EmoticonCell.self, forCellWithReuseIdentifier: XMGEmoticonCellReuseIdentifier);
-        collview.dataSource = self
+        collview.dataSource = self;
+        collview.delegate = self;
         return collview;
     }();
     
@@ -70,10 +85,13 @@ class EmoticonViewController: UIViewController {
         let toolbar = UIToolbar();
         toolbar.tintColor = UIColor.darkGray;
         var items = [UIBarButtonItem]();
+        var index = 0;
         for title in ["最近", "默认", "emoji", "浪小花"]{
             
             let item = UIBarButtonItem(title: title, style: UIBarButtonItemStyle.plain, target: self, action: #selector(clickItem(item:)));
-            item.tag += 1;
+            
+            item.tag = index;
+            index = index + 1;
             items.append(item);
             //加弹簧（不然没有间距）
             items.append(UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil))
@@ -85,10 +103,20 @@ class EmoticonViewController: UIViewController {
     }();
     
     public lazy var packages : [EmoticonPackage] = EmoticonPackage.loadPackages();
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
-extension EmoticonViewController : UICollectionViewDataSource{
-   
+extension EmoticonViewController : UICollectionViewDataSource,UICollectionViewDelegate{
+    
+    /// 设置 cell
+    ///
+    /// - Parameters:
+    ///   - collectionView: <#collectionView description#>
+    ///   - indexPath: <#indexPath description#>
+    /// - Returns: <#return value description#>
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
      
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier:XMGEmoticonCellReuseIdentifier , for: indexPath) as! EmoticonCell;
@@ -115,11 +143,20 @@ extension EmoticonViewController : UICollectionViewDataSource{
     
         return packages.count;
     }
-
+    
+    /// 选择了 cell
+    ///
+    /// - Parameters:
+    ///   - collectionView: <#collectionView description#>
+    ///   - indexPath: <#indexPath description#>
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let emotion = packages[indexPath.section].emoticons![indexPath.item];
+        emoticonDidSelectCallBack(emotion);
+    }
 }
 
 class EmoticonCell : UICollectionViewCell {
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame);
@@ -169,6 +206,7 @@ class EmoticonCell : UICollectionViewCell {
         let button = UIButton();
         //button 的字体
         button.titleLabel?.font = UIFont.systemFont(ofSize: 32);
+        button.isUserInteractionEnabled = false;
         return button;
     }();
     
