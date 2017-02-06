@@ -20,6 +20,8 @@ class ViewController: UIViewController {
         
         // 2.将表情键盘控制器的view设置为UITextView的inputView
         self.textView.inputView = emoticon.view;
+        
+     
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,8 +29,21 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-
-    private lazy var emoticon : EmoticonViewController = EmoticonViewController();
     
+    private lazy var emoticon : EmoticonViewController = EmoticonViewController.init { [weak self] (emotion) in
+        
+        //判断是不是emoji 表情
+        if emotion.emojiStr != nil {
+            
+            //  self.textView.replace 替换 text
+            //  self.textView.selectedTextRange 选中的 text
+            self!.textView.replace(self!.textView.selectedTextRange!, withText: emotion.emojiStr!);
+        }
+    };
+    
+    deinit {
+        
+        print("滚");
+    }
 }
 
