@@ -90,7 +90,6 @@ class EmoticonPackage: NSObject {
         }
     }
     
-    
     /// 添加删除按钮
     func appendEmtyEmoticons(){
         
@@ -105,6 +104,42 @@ class EmoticonPackage: NSObject {
             //最后加上删除按钮
             emoticons!.append(Emoticon.init(removButton: true));
         }
+    }
+    
+    
+    /// 添加个人喜欢
+    func appendEmoticon(emotion : Emoticon){
+        
+        //判断是不是删除按钮
+        if emotion.removButton {
+            return;
+        }
+        
+        
+        let contains = emoticons?.contains(emotion);
+        //判断里面是不是包含这个图形
+        if contains == false {
+            
+            //删除『删除按钮』 最后一个
+            emoticons?.removeLast();
+            //添加一个图标
+            emoticons?.append(emotion);
+        }
+    
+        var result = emoticons!.sorted { (e1, e2) -> Bool in
+            return e1.times > e2.times;
+        }
+     
+        //判断里面是不是包含这个图形，包含的，把多余的图形删除，添加删除按钮
+        if contains == false {
+     
+            //删除最后一个数据
+            result.removeLast();
+            //添加删除按钮
+            result.append(Emoticon.init(removButton: true));
+        }
+        
+        emoticons = result;
     }
     
     /**
@@ -141,6 +176,8 @@ class Emoticon: NSObject {
     var id: String?
     /// 删除按钮
     var removButton : Bool = false;
+    /// 点击次数
+    var times : Int = 0;
     
     /// 表情图片的全路径
     var imagePath: String?
