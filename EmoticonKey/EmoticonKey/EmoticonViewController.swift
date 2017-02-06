@@ -151,7 +151,11 @@ extension EmoticonViewController : UICollectionViewDataSource,UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let emotion = packages[indexPath.section].emoticons![indexPath.item];
+        emotion.times = 1 + emotion.times;
+        packages[0].appendEmoticon(emotion: emotion);
         emoticonDidSelectCallBack(emotion);
+        
+       // collectionView.reloadData();
     }
 }
 
