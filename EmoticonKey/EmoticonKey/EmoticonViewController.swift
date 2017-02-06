@@ -59,7 +59,6 @@ class EmoticonViewController: UIViewController {
         }
     }
     
-    
     /// 点击按钮，触发事件
     ///
     /// - Parameter item: <#item description#>
