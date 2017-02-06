@@ -39,6 +39,16 @@ class EmoticonPackage: NSObject {
     // emoji -> 一组  -> 所有的表情模型(emoticons)
     class func loadPackages() -> [EmoticonPackage] {
         
+        //创建数据
+        var packages = [EmoticonPackage]();
+        
+        //添加最近组
+        let pk = EmoticonPackage(id: "");
+        pk.group_name_cn = "最近";
+        pk.emoticons = [Emoticon]();
+        pk.appendEmtyEmoticons();
+        packages.append(pk);
+        
         let path = Bundle.main.path(forResource: "emoticons.plist", ofType: nil, inDirectory: "Emoticons.bundle")
        
         // 1.加载emoticons.plist
@@ -46,26 +56,37 @@ class EmoticonPackage: NSObject {
         // 2.或emoticons中获取packages
         let dictArray = dict["packages"] as! [[String:AnyObject]]
         // 3.遍历packages数组
-        var packages = [EmoticonPackage]()
-        for d in dictArray
-        {
+        for d in dictArray{
             // 4.取出ID, 创建对应的组
             let package = EmoticonPackage(id: d["id"]! as! String)
             packages.append(package)
             package.loadEmoticons();
             package.appendEmtyEmoticons();
         }
+        
         return packages
     }
     
     /// 加载每一组中所有的表情
     func loadEmoticons() {
+        
         let emoticonDict = NSDictionary(contentsOfFile: infoPath(fileName: "info.plist"))!
         group_name_cn = emoticonDict["group_name_cn"] as? String
         let dictArray = emoticonDict["emoticons"] as! [[String: String]]
-        emoticons = [Emoticon]()
+        emoticons = [Emoticon]();
+        
+        //每个21就加删除按钮
+        var nub = 0;
         for dict in dictArray{
-            emoticons?.append(Emoticon(dict: dict, id: id!))
+            
+            if nub == 20{
+                
+                emoticons!.append(Emoticon.init(removButton: true));
+                nub = 0;
+            }
+            
+            emoticons!.append(Emoticon(dict: dict, id: id!))
+            nub = nub+1;
         }
     }
     
@@ -114,6 +135,7 @@ class Emoticon: NSObject {
     var png: String?;
     /// emoji表情对应的十六进制字符串
     var code: String?;
+    //emoji 表情
     var emojiStr: String?;
     /// 当前表情对应的文件夹
     var id: String?
