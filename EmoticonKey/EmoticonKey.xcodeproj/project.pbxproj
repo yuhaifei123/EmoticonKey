@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4DC141161E41AFD30045129A /* EmoticonPackage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC141151E41AFD30045129A /* EmoticonPackage.swift */; };
 		4DC141181E41B5EA0045129A /* Emoticons.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4DC141171E41B5EA0045129A /* Emoticons.bundle */; };
+		4DC1411A1E485A2A0045129A /* UITextView+Tool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DC141191E485A2A0045129A /* UITextView+Tool.swift */; };
 		4DD71A2B1E372F75007D585D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD71A2A1E372F75007D585D /* AppDelegate.swift */; };
 		4DD71A2D1E372F75007D585D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DD71A2C1E372F75007D585D /* ViewController.swift */; };
 		4DD71A301E372F75007D585D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DD71A2E1E372F75007D585D /* Main.storyboard */; };
@@ -70,6 +71,7 @@
 /* Begin PBXFileReference section */
 		4DC141151E41AFD30045129A /* EmoticonPackage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonPackage.swift; sourceTree = "<group>"; };
 		4DC141171E41B5EA0045129A /* Emoticons.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Emoticons.bundle; sourceTree = "<group>"; };
+		4DC141191E485A2A0045129A /* UITextView+Tool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Tool.swift"; sourceTree = "<group>"; };
 		4DD71A271E372F75007D585D /* EmoticonKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmoticonKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DD71A2A1E372F75007D585D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4DD71A2C1E372F75007D585D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				4DD71A651E373979007D585D /* EmoticonViewController.swift */,
+				4DC141191E485A2A0045129A /* UITextView+Tool.swift */,
 				4DC141121E41AF900045129A /* mode */,
 				4DD71A681E3844DB007D585D /* LICENSE */,
 				4DD71A691E3844DB007D585D /* README.md */,
@@ -414,6 +417,7 @@
 				4DD71A961E3844DB007D585D /* ConstraintLayoutGuideDSL.swift in Sources */,
 				4DD71A8D1E3844DB007D585D /* ConstraintAttributes.swift in Sources */,
 				4DD71A9F1E3844DB007D585D /* ConstraintMultiplierTarget.swift in Sources */,
+				4DC1411A1E485A2A0045129A /* UITextView+Tool.swift in Sources */,
 				4DD71A911E3844DB007D585D /* ConstraintDSL.swift in Sources */,
 				4DD71A971E3844DB007D585D /* ConstraintLayoutSupport.swift in Sources */,
 				4DD71AA71E3844DB007D585D /* Debugging.swift in Sources */,
