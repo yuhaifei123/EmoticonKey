@@ -26,6 +26,9 @@ import UIKit
  */
 class EmoticonPackage: NSObject {
 
+    //变成单例，这样可以降低性能
+    static let staticLoadPackages : [EmoticonPackage] = loadPackages();
+    
     /// 当前组表情文件夹的名称
     var id: String?
     /// 组的名称
@@ -37,7 +40,7 @@ class EmoticonPackage: NSObject {
     // 浪小花 -> 一组  -> 所有的表情模型(emoticons)
     // 默认 -> 一组  -> 所有的表情模型(emoticons)
     // emoji -> 一组  -> 所有的表情模型(emoticons)
-    class func loadPackages() -> [EmoticonPackage] {
+    private class func loadPackages() -> [EmoticonPackage] {
         
         //创建数据
         var packages = [EmoticonPackage]();
