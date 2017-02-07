@@ -14,7 +14,6 @@ private let XMGEmoticonCellReuseIdentifier = "XMGEmoticonCellReuseIdentifier"
 
 class EmoticonViewController: UIViewController {
     
-    
     /// 定义一个 block 函数
     var emoticonDidSelectCallBack : ((_ emoticon : Emoticon) -> ()) ;
     
