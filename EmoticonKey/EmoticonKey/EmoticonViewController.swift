@@ -101,7 +101,7 @@ class EmoticonViewController: UIViewController {
         return toolbar;
     }();
     
-    public lazy var packages : [EmoticonPackage] = EmoticonPackage.loadPackages();
+    public lazy var packages : [EmoticonPackage] = EmoticonPackage.staticLoadPackages;
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
